@@ -1,0 +1,79 @@
+.pizza-image {
+    background-size: 100% 100%;
+}
+
+.card {
+    border: none;
+}
+
+.card-body {
+    padding-left: 0.5rem;
+}
+
+.card-text {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #dc143c;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.price {
+    font-size: 1.5rem;
+    color: #006400;
+    margin-left: 10%;
+}
+
+.single-price {
+    font-size: 1.5rem;
+    color: #006400;
+}
+
+.add-to-cart-button {
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border: 1px solid #006400;
+    background-color: #006400;
+    border-radius: 15px;
+    margin-left: 10%;
+}
+
+.add-to-cart-button:hover {
+    color: #000;
+}
+
+.margin-row {
+    margin-top: 5%;
+}
+
+.color-range-main {
+    margin-bottom: 10%;
+}
+
+.form-cat {
+    width: 75%;
+}
+
+.img-product {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.content-padding {
+    padding: 1rem 3rem;
+}
+
+.quantity {
+    width: 15%;
+}
+
+.extra-space {
+    margin-top: 3%;
+}
+
+.add-cart {
+    margin-left: 0;
+    margin-top: 3%;
+    display: inherit;
+    text-align: center;
+}
