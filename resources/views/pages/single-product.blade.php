@@ -16,11 +16,11 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6 margin-row">
-            <img src="{{ asset('images/big/capriciossa.jpg') }}" class="img-product">
+            <img src="{{ asset($product->big_image) }}" class="img-product">
         </div>
         <div class="col-md-6 content-padding">
-            <h2>Capricosa</h2>
-            <p class="single-price">2 &euro;</p>
+            <h2>{{ $product->name }}</h2>
+            <p class="single-price">{{ $product->price }} &euro;</p>
             <label>Please, select your quantity:</label>
             <input type="number" name="quantity" value="1" class="quantity form-control">
             <label class="extra-space">Pick which size do you want:</label>
