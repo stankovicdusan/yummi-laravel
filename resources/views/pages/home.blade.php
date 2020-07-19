@@ -32,14 +32,12 @@
                         <h4>Meat/Vegan</h4>
                     </div>
                     <div class="category-group">
+                        @foreach($typeMeat as $tm)
                         <div class="form-check">
-                            <input type="checkbox" name="categories" />
-                            <span>Meat</span>
+                            <input type="checkbox" name="categories" value="{{ $tm->id }}" />
+                            <span>{{ $tm->name }}</span>
                         </div>
-                        <div class="form-check">
-                            <input type="checkbox" name="categories" />
-                            <span>Vegetarian</span>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
                 <div class="color-range-main">
