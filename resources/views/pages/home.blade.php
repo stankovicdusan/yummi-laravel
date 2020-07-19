@@ -52,66 +52,19 @@
         </div>
         <div class="col-md-9">
             <div class="row">
+                @foreach($products as $p)
                 <div class="col-md-4">
                     <div class="card">
                         <div class="card-body">
-                            <img src="{{ asset('images/margarita.jpg') }}" class="img-product">
-                            <p class="card-text">Magherita</p>
-                            <span class="price">2 &euro;</span>
-                            <a href="#" class="add-to-cart-button">Add to cart!</a>
+                            <img src="{{ asset($p->small_image) }}" class="img-product">
+                            <p class="card-text">{{ $p->name }}</p>
+                            <span class="price">{{ $p->price }} &euro;</span>
+                            <a href="{{ route('product', ['id' => $p->id]) }}" class="add-to-cart-button">Add to
+                                cart!</a>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <img src="{{ asset('images/margarita.jpg') }}" class="img-product">
-                            <p class="card-text">Magherita</p>
-                            <span class="price">2 &euro;</span>
-                            <a href="#" class="add-to-cart-button">Add to cart!</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <img src="{{ asset('images/margarita.jpg') }}" class="img-product">
-                            <p class="card-text">Magherita</p>
-                            <span class="price">2 &euro;</span>
-                            <a href="#" class="add-to-cart-button">Add to cart!</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <img src="{{ asset('images/margarita.jpg') }}" class="img-product">
-                            <p class="card-text">Magherita</p>
-                            <span class="price">2 &euro;</span>
-                            <a href="#" class="add-to-cart-button">Add to cart!</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <img src="{{ asset('images/margarita.jpg') }}" class="img-product">
-                            <p class="card-text">Magherita</p>
-                            <span class="price">2 &euro;</span>
-                            <a href="#" class="add-to-cart-button">Add to cart!</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <img src="{{ asset('images/margarita.jpg') }}" class="img-product">
-                            <p class="card-text">Magherita</p>
-                            <span class="price">2 &euro;</span>
-                            <a href="#" class="add-to-cart-button">Add to cart!</a>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </div>

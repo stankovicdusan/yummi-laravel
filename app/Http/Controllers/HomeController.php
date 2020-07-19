@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\FoodType;
 use App\TypeOfMeat;
+use App\Product;
 
 class HomeController extends Controller
 {
@@ -13,9 +14,12 @@ class HomeController extends Controller
         $foodType = FoodType::all();
         $typeMeat = TypeOfMeat::all();
 
+        $products = Product::all();
+
         return view('pages.home', [
             'foodtype' => $foodType,
-            'typeMeat' => $typeMeat
+            'typeMeat' => $typeMeat,
+            'products' => $products
         ]);
     }
 }
