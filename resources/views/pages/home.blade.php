@@ -19,18 +19,12 @@
                         <h4>Food type</h4>
                     </div>
                     <div class="category-group">
+                        @foreach($foodtype as $ft)
                         <div class="form-check">
-                            <input type="checkbox" name="categories" />
-                            <span>Pizza</span>
+                            <input type="checkbox" name="categories" value="{{ $ft->id }}" />
+                            <span>{{ $ft->name }}</span>
                         </div>
-                        <div class="form-check">
-                            <input type="checkbox" name="categories" />
-                            <span>Calzone</span>
-                        </div>
-                        <div class="form-check">
-                            <input type="checkbox" name="categories" />
-                            <span>Pasta</span>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
                 <div class="color-range-main">
