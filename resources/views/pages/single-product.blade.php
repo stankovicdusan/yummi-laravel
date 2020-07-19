@@ -23,12 +23,21 @@
             <p class="single-price">{{ $product->price }} &euro;</p>
             <label>Please, select your quantity:</label>
             <input type="number" name="quantity" value="1" class="quantity form-control">
+            @if($product->food_type_id == 1)
             <label class="extra-space">Pick which size do you want:</label>
             <select class="form-control">
                 <option value="0">32cm</option>
                 <option value="1">42cm</option>
                 <option value="3">50cm</option>
             </select>
+            @elseif($product->food_type_id == 11)
+            <label class="extra-space">Pick which size do you want:</label>
+            <select class="form-control">
+                <option value="0">300g</option>
+                <option value="1">450g</option>
+                <option value="3">650g</option>
+            </select>
+            @endif
             <p class="extra-space">Do you want some extra addition to your order?</p>
             <div class="extra"><input type="checkbox" name="addition"><label>Extra cheese</label></div>
             <div class="extra"><input type="checkbox" name="addition"><label>Extra ketchup</label></div>

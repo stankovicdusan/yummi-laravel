@@ -21,7 +21,7 @@
                     <div class="category-group">
                         @foreach($foodtype as $ft)
                         <div class="form-check">
-                            <input type="checkbox" name="categories" value="{{ $ft->id }}" />
+                            <input type="checkbox" name="typeFood[]" value="{{ $ft->id }}" />
                             <span>{{ $ft->name }}</span>
                         </div>
                         @endforeach
@@ -34,7 +34,7 @@
                     <div class="category-group">
                         @foreach($typeMeat as $tm)
                         <div class="form-check">
-                            <input type="checkbox" name="categories" value="{{ $tm->id }}" />
+                            <input type="checkbox" name="typeMeat[]" value="{{ $tm->id }}" />
                             <span>{{ $tm->name }}</span>
                         </div>
                         @endforeach
@@ -52,6 +52,11 @@
         </div>
         <div class="col-md-9">
             <div class="row">
+                <div class="col-md-6">
+                    <input type="search" id="search-text" class="form-control" placeholder="Search here our products">
+                </div>
+            </div>
+            <div class="row products">
                 @foreach($products as $p)
                 <div class="col-md-4">
                     <div class="card">
@@ -69,64 +74,96 @@
         </div>
     </div>
 </div>
-
-<!-- Top rated -->
-<div class="container">
-    <div class="row margin-row">
-        <div class="col-md-12">
-            <h2>Checkout our top rated meals</h2>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-3">
-            <div class="card">
-                <div class="card-body">
-                    <img src="{{ asset('images/margarita.jpg') }}" class="img-product">
-                    <p class="card-text">Magherita</p>
-                    <span class="price">2 &euro;</span>
-                    <a href="#" class="add-to-cart-button">Add to cart!</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card">
-                <div class="card-body">
-                    <img src="{{ asset('images/vegeterian.jpg') }}" class="img-product">
-                    <p class="card-text">Vegetarian</p>
-                    <span class="price">2 &euro;</span>
-                    <a href="#" class="add-to-cart-button">Add to cart!</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card">
-                <div class="card-body">
-                    <img src="{{ asset('images/capriciossa.jpg') }}" class="img-product">
-                    <p class="card-text">Capricciosa</p>
-                    <span class="price">2 &euro;</span>
-                    <a href="#" class="add-to-cart-button">Add to cart!</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card">
-                <div class="card-body">
-                    <img src="{{ asset('images/diavolo.jpg') }}" class="img-product">
-                    <p class="card-text">Diavola</p>
-                    <span class="price">2 &euro;</span>
-                    <a href="#" class="add-to-cart-button">Add to cart!</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 <script>
     $('.range-slider').ionRangeSlider({
         type: "double",
-        min: 0,
-        max: 1000,
-        from: 200,
-        to: 500,
+        min: {{ $minPrice->price }},
+        max: {{ $maxPrice->price }},
+        from: {{ $minPrice->price }},
+        to: {{ $maxPrice->price }},
+        step: 0.2
+    });
+</script>
+<script>
+    $(document).ready(function(){
+        //creating empty object to store in him data later on specific events
+        let data = {}
+
+        //event for range slider that store values in data object and passing it to ajax request
+        $('.range-slider').change(function(){
+            data.price_range = $(this).val();
+            
+            ajaxRequest();
+        });
+
+        //event for search that store values in data object and passing it to ajax request
+        $('#search-text').keyup(function(){
+            data.search = $(this).val();
+
+            ajaxRequest();
+        });
+        
+        //event for type food checkboxes that store values in data object and passing it to ajax request
+        $('input[name="typeFood[]"]').change(function(){
+            let typeFood = [];
+            $('input[name="typeFood[]"]:checked').each(function(){
+                typeFood.push($(this).val());
+            });
+
+            data.type_food = typeFood;
+
+            ajaxRequest();
+        });
+
+        //event for type of meat checkboxes that store values in data object and passing it to ajax request
+        $('input[name="typeMeat[]"]').change(function(){
+            let typeMeat = [];
+            $('input[name="typeMeat[]"]:checked').each(function(){
+                typeMeat.push($(this).val());
+            });
+
+            data.type_meat = typeMeat;
+
+            ajaxRequest();
+        });
+
+        //function that calls ajax and returns data from server
+        function ajaxRequest(){
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="token"]').attr('content')
+                },
+                url: '{{ route("filter") }}',
+                method: 'get',
+                dataType: 'json',
+                data: data,
+                success: function(response){
+                    showProducts(response);
+                },
+                error: function(xhr){
+                    console.log(xhr);
+                }
+            });
+
+            function showProducts(products){
+                let html = '';
+                for(let p of products){
+                    html += `<div class="col-md-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <img src="${p.small_image}" class="img-product">
+                                        <p class="card-text">${p.name}</p>
+                                        <span class="price">${p.price} &euro;</span>
+                                        <a href="/product/${p.id}" class="add-to-cart-button">Add to
+                                            cart!</a>
+                                    </div>
+                                </div>
+                            </div>`;
+                }
+
+                $('.products').html(html);
+            }
+        }
     });
 </script>
 
