@@ -1,3 +1,9 @@
+<p>Vendor folder is deleted, if you want to run application, you have to write in your cmd composer install.</p>
+<p>Simple laravel application for ordering fast food.</p>
+
+
+
+
 <p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
 
 <p align="center">
