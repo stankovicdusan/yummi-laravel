@@ -55,6 +55,15 @@
             </div>
         </div>
         <div class="col-md-9">
+            @if(session()->has('success'))
+            <div class="alert alert-success">
+                {{ session()->get('success') }}
+            </div>
+            @elseif(session()->has('error'))
+            <div class="alert alert-danger">
+                {{ session()->get('error') }}
+            </div>
+            @endif
             <div class="row">
                 <div class="col-md-6">
                     <input type="search" id="search-text" class="form-control" placeholder="Search here our products">

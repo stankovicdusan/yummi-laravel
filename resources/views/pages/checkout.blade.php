@@ -4,16 +4,27 @@
 
 <div class="container">
     <div class="row row-margin">
+
         <div class="col-md-6">
-            <div class="wrapper-checkout">
-                <h4>E-mail</h4>
-                <p>Here you need to enter your email.</p>
-                <input type="text" id="emailText" placeholder="Your e-mail" class="form-control emailInputText">
+            @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
             </div>
-            <div class="wrapper-checkout">
-                <h4>Delivery</h4>
-                <p>We need some information about you:</p>
-                <form action="#" method="post">
+            @endif
+            <form method="post" action="{{ route('store-order') }}">
+                @csrf
+                <div class="wrapper-checkout">
+                    <h4>E-mail</h4>
+                    <p>Here you need to enter your email.</p>
+                    <input type="text" name="email" placeholder="Your e-mail" class="form-control emailInputText">
+                </div>
+                <div class="wrapper-checkout">
+                    <h4>Delivery</h4>
+                    <p>We need some information about you:</p>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <input type="text" class="form-control" name="firstName" placeholder="First name">
@@ -37,24 +48,24 @@
                         <input type="text" class="form-control" name="phoneNumber"
                             placeholder="Your phone number (helps for delivery)">
                     </div>
-                </form>
-            </div>
-            <div class="wrapper-checkout">
-                <h4>Payment method</h4>
+                </div>
+                <div class="wrapper-checkout">
+                    <h4>Payment method</h4>
 
-                <p>Choose payment method:</p>
-                <div class="container specific-container">
-                    <div class="payment-method">
-                        <input type="radio" checked="checked" name="pay_method" /> Cash on delivery
-                    </div>
-                    <div class="payment-method">
-                        <input type="radio" name="pay_method" /> Pay with card
+                    <p>Choose payment method:</p>
+                    <div class="container specific-container">
+                        @foreach($payment_methods as $pay)
+                        <div class="payment-method">
+                            <input type="radio" value="{{ $pay->id }}" name="pay_method" /> {{ $pay->name }}
+                        </div>
+                        @endforeach
                     </div>
                 </div>
-            </div>
 
-            <input type="submit" value="Order" class="add-to-cart-button add-cart form-control" name="submitCheckout" />
+                <input type="submit" value="Order" class="add-to-cart-button add-cart form-control">
+            </form>
         </div>
+
         <div class="col-md-6">
             <div class="wrapper-checkout">
                 <h4>Your shopping cart</h4>
@@ -78,6 +89,8 @@
                             <input type="number" class="quantity form-control" name="quantity"
                                 value="{{ $product['quantity'] }}">
                         </div>
+                        <a href="{{ route('delete', ['id' => $id]) }}"><img src="{{ asset('images/img/close.svg') }}"
+                                class="delete-icon"></a>
                     </div>
                 </div>
                 @if($product['addition'] != null)
@@ -92,15 +105,15 @@
                 @else
                 <div class="row wrapper-checkout">
                     <div class="col-lg-12">
-                        <p>Korpa je prazna</p>
+                        <p>Shopping cart is empty</p>
                     </div>
                 </div>
                 @endif
                 <div class="row wrapper-checkout">
                     <div class="col-md-6">
                         <p class="second-row-paragraf">Total price</p>
-                        <p class="first-paragraf">Shipping</p>
-                        <span style="font-size: 0.8rem">Shipping is free if total price is above 7 &euro;</span>
+                        <p class="first-paragraf">Delivery costs</p>
+                        <span style="font-size: 0.8rem">Delivery is free if total price is above 7 &euro;</span>
                     </div>
                     <div class="col-md-6">
                         @if(!empty(session()->get('shop-cart')))
@@ -116,14 +129,15 @@
                             }
                         ?>
                         <p class="second-row-paragraf">{{ countTotalPrice() }} &euro;</p>
-                        @else
-                        <p class="second-row-paragraf">0 &euro;</p>
-                        @endif
                         @if(countTotalPrice() > 7)
                         <p class="second-row-paragraf">0 &euro;</p>
                         @else
                         <p class="second-row-paragraf">2.9 &euro;</p>
                         @endif
+                        @else
+                        <p class="second-row-paragraf">0 &euro;</p>
+                        @endif
+
                     </div>
                 </div>
                 <div class="row wrapper-checkout">

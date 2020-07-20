@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Product;
+use App\PaymentMethod;
 use Illuminate\Support\Facades\Redis;
 
 class ProductController extends Controller
@@ -44,14 +45,19 @@ class ProductController extends Controller
         }
     }
 
-    public function delete()
+    public function delete($id)
     {
-        session()->forget('shop-cart');
-        return redirect()->route('product', ['id' => 71]);
+        session()->forget('shop-cart.' . $id);
+
+        return redirect()->back();
     }
 
     public function checkout()
     {
-        return view('pages.checkout');
+        $payment_methods = PaymentMethod::all();
+
+        return view('pages.checkout', [
+            'payment_methods' => $payment_methods
+        ]);
     }
 }

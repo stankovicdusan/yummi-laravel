@@ -16,8 +16,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/product/{id}', 'ProductController@show')->name('product');
 
+Route::get('/filter', 'HomeController@filter')->name('filter');
+
 Route::post('/cart/{id}', 'ProductController@addToCart')->name('add-to-cart');
-Route::get('/delete', 'ProductController@delete');
+Route::get('/delete/{id}', 'ProductController@delete')->name('delete');
 Route::get('/checkout', 'ProductController@checkout')->name('checkout');
 
-Route::get('/filter', 'HomeController@filter')->name('filter');
+Route::post('/order', 'OrderController@store')->name('store-order');

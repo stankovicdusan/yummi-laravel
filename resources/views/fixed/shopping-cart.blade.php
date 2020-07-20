@@ -30,6 +30,8 @@
                     <input type="number" class="quantity form-control form-margin" name="cart-quantity"
                         value="{{ $product['quantity'] }}">
                 </div>
+                <a href="{{ route('delete', ['id' => $id]) }}"><img src="{{ asset('images/img/close.svg') }}"
+                        class="delete-icon"></a>
             </div>
         </div>
         <div class="bottom-line"></div>
