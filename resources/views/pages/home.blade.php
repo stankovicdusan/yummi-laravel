@@ -10,6 +10,10 @@
     </div>
 </div>
 
+<!-- Shopping cart -->
+
+@include('fixed.shopping-cart');
+
 <div class="container">
     <div class="row margin-row">
         <div class="col-md-3">
@@ -29,7 +33,7 @@
                 </div>
                 <div class="color-range-main">
                     <div class="category-heading">
-                        <h4>Meat/Vegan</h4>
+                        <h4>Meat/Vegan/Fish</h4>
                     </div>
                     <div class="category-group">
                         @foreach($typeMeat as $tm)

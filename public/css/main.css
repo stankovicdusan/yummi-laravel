@@ -73,7 +73,162 @@
 
 .add-cart {
     margin-left: 0;
-    margin-top: 3%;
+    margin-top: 5%;
+    text-align: center;
+}
+
+.side-shopping-cart {
+    position: fixed;
+    right: 0;
+    top: 10%;
+    border: 1px solid grey;
+    background-color: grey;
+    padding: 0.4rem;
+}
+
+.count {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    padding-left: 5px;
+    background-color: blue;
+    border: 1px solid blue;
+    border-radius: 50%;
+    color: #fff;
+}
+
+.form-margin {
+    margin-top: 4%;
+}
+
+.shopping-cart-items {
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 999;
+    width: 33%;
+    display: none;
+    height: 100%;
+    overflow-y: scroll;
+}
+
+.shop-cart-top {
+    position: relative;
+    background-color: #32a2ad;
+    padding: 0.5rem 1rem;
+}
+
+.shop-cart-top p {
+    padding-left: 17%;
+    font-size: 1.5rem;
+    color: #fff;
+    margin-bottom: 0;
+}
+
+.shop-cart-icon {
+    position: absolute;
+    left: 6%;
+    width: 9%;
+}
+
+.shop-cart-body {
+    background-color: #fff;
+    width: 100%;
+    padding: 0 1rem 1.5rem 1rem;
+}
+
+.cart-image {
+    width: 140%;
+}
+
+.quantity-cart {
+    margin-right: 1rem;
+}
+
+.parent-position {
+    position: relative;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.title-price {
+    padding-top: 1rem;
+    padding-left: 3rem;
+}
+
+.quantity-shopping-cart {
+    position: absolute;
+    right: 0;
+    top: 25%;
+}
+
+.bottom-line {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    width: 90%;
+    margin: auto;
+}
+
+.total-price-shopcart {
+    text-align: center;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    margin-bottom: 0;
+    font-weight: bold;
+}
+
+.first-button {
+    margin-top: 5%;
+    margin-left: 12%;
+}
+
+.close-shop-cart {
+    border: 1px solid #000;
+    border-radius: 20px;
+    padding: 1rem 1.5rem;
+    width: 100%;
+    text-transform: uppercase;
     display: inherit;
     text-align: center;
+    color: #000;
+}
+
+.shop-cart-btn {
+    display: inherit;
+    border: 1px solid #066d17;
+    border-radius: 20px;
+    padding: 1rem 1.5rem;
+    width: 100%;
+    background-color: #066d17;
+    color: #fff;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.empty-cart {
+    text-align: center;
+    padding-top: 1.5rem;
+}
+
+.wrapper-checkout {
+    margin-top: 5%;
+}
+
+.row-margin {
+    margin-bottom: 10%;
+}
+
+.first-paragraf {
+    margin-bottom: 0;
+}
+
+.checkout-price {
+    font-size: 1.5rem;
+    color: #006400;
+    margin-bottom: 0.5rem;
+}
+
+.override-width {
+    max-width: 25% !important;
 }
