@@ -64,6 +64,11 @@
                 {{ session()->get('error') }}
             </div>
             @endif
+            @if(session()->has('errorQuantity'))
+            <div class="alert alert-danger">
+                {{ session()->get('errorQuantity') }}
+            </div>
+            @endif
             <div class="row">
                 <div class="col-md-6">
                     <input type="search" id="search-text" class="form-control" placeholder="Search here our products">

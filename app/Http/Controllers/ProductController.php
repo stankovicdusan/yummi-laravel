@@ -19,6 +19,7 @@ class ProductController extends Controller
         ]);
     }
 
+    //this method put product with quantity and all other information in session
     public function addToCart($id, Request $request)
     {
         $product = Product::find($id);
@@ -45,6 +46,7 @@ class ProductController extends Controller
         }
     }
 
+    //this method delete one item in cart
     public function delete($id)
     {
         session()->forget('shop-cart.' . $id);
@@ -54,10 +56,22 @@ class ProductController extends Controller
 
     public function checkout()
     {
-        $payment_methods = PaymentMethod::all();
+        if (!empty(session()->get('shop-cart'))) {
+            foreach (session()->get('shop-cart') as $item) {
+                if ($item['quantity'] != '0') {
+                    $payment_methods = PaymentMethod::all();
 
-        return view('pages.checkout', [
-            'payment_methods' => $payment_methods
-        ]);
+                    return view('pages.checkout', [
+                        'payment_methods' => $payment_methods
+                    ]);
+                } else {
+                    return redirect()->route('home')->with('errorQuantity', "You can't procceed with your order if you don't put quantity on item you want to order!");
+                }
+            }
+        } else {
+            return view('pages.checkout', [
+                'payment_methods' => $payment_methods
+            ]);
+        }
     }
 }
